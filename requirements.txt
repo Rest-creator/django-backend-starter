@@ -1,0 +1,16 @@
+Django>=4.2
+djangorestframework>=3.14
+python-dotenv>=1.0
+
+# Core Framework
+Django>=4.2
+djangorestframework>=3.14
+
+# Environment Variables
+python-dotenv>=1.0
+
+# Dev & Testing
+pytest>=8.0
+pytest-django>=4.7
+black>=24.0
+flake8>=7.0
