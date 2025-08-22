@@ -119,7 +119,7 @@ DEBUG = True  # for development only
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
-AUTH_USER_MODEL = "loan.Users"
+AUTH_USER_MODEL = "loan.UserModel"
 
 
 REST_FRAMEWORK = {
