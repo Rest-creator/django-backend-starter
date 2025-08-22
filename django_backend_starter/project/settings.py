@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    "django_backend_starter.apps.loan",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 # ----------------------
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
 # ----------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'apps.loan.middleware.password_expiry.PasswordExpiryMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -110,3 +114,36 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # DEFAULT AUTO FIELD
 # ----------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DEBUG = True  # for development only
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+AUTH_USER_MODEL = "loan.Users"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        # allow both JWT and session auth
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+# Cookies for sessions (adjust for prod)
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SECURE = False  # True in prod over HTTPS
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:8000"]
