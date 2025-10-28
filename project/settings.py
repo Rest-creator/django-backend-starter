@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # My Apps
     "core.loan_application_module",
+    "core.auth_module",
 
     # 3rd Party Apps
     "rest_framework",
@@ -142,3 +143,6 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# CUSTOM USER MODEL
+AUTH_USER_MODEL = "auth_module.User"

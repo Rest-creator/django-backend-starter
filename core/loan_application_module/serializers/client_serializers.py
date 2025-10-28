@@ -54,7 +54,5 @@ class ClientWriteSerializer(serializers.ModelSerializer):
         fields = [
             "first_name",
             "last_name",
-            "middle_name",
-            "national_id",
-            "phone_number",
-            ]
+            "national_id"
+        ]

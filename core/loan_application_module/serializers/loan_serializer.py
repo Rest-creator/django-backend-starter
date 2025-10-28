@@ -51,6 +51,14 @@ class LoanApplicationWriteSerializer(serializers.ModelSerializer):
             "notes"
         ]
 
+    # def update(self, instance, validated_data):
+    #     request_user = self.context["request"].user
+    #     if instance.created_by != request_user:
+    #         restricted_fields = [
+
+    #         ]
+    #     return super().update(instance, validated_data)
+
 
 class LoanApplicationReadSerializer(serializers.ModelSerializer):
     class Meta:

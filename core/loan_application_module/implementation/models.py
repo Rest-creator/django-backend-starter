@@ -43,7 +43,7 @@ class Client(models.Model):
     business_income = models.DecimalField(
         max_digits=12, decimal_places=2, null=True, blank=True
     )
-    business_age = models.CharField(null=True, blank=True)
+    business_age = models.CharField( max_length=50, null=True, blank=True)
 
     # financial
     bank_name = models.CharField(max_length=400, blank=True)

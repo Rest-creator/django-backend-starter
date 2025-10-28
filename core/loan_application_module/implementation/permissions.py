@@ -8,22 +8,14 @@ class IsAgent(BasePermission):
     """
 
     def has_permission(self, request, view):
-        return bool(
-            request.user
-            and request.user.is_authenticated
-            and getattr(request.user, "is_agent", False)
-        )
+        return getattr(request.user, "is_agent", False)
 
 
 class IsAdminReviewer(BasePermission):
     def has_permission(self, request, view):
         return bool(
-            request.user
-            and request.user.is_authenticated
-            and (
                 request.user.is_staff
                 or getattr(request.user, "is_admin_reviewer", False)
-            )
         )
 
 
@@ -43,13 +35,13 @@ class IsAgentOrAdmin(BasePermission):
     def has_permission(self, request, view):
         return (
             getattr(request.user, "is_agent", False) or
-            getattr(request.user, "is_superuser", False)
+            getattr(request.user, "is_admin_reviewer", False)
             )
     
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return (
                 getattr(request.user, "is_agent", False) or 
-                getattr(request.user, "is_superuser", False)
+                getattr(request.user, "is_admin_reviewer", False)
                 )
-        return getattr(request.user, "is_superuser", False)
+        return getattr(request.user, "is_admin_reviewer", False)

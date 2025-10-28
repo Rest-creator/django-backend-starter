@@ -1,4 +1,3 @@
-# loan/interfaces/views/client_views.py
 from rest_framework import generics, permissions
 from ..repository.client_repository import ClientRepository
 from ..services.client_services import ClientService

@@ -1,0 +1,1 @@
+default_app_config = 'core.loan_application_module.apps.AuthModuleConfig'
